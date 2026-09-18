@@ -19,6 +19,7 @@ import productRoutes from "./src/routes/productRoutes.js";
 import cartRoutes from "./src/routes/cartRoutes.js";
 import rateRoutes from "./src/routes/rateRoutes.js";
 import orderRoutes from "./src/routes/orderRoutes.js";
+import customOrderRoutes from "./src/routes/customOrderRoutes.js";
 import { protect } from "./src/middlewares/authMiddleware.js";
 import errorHandler from "./src/middlewares/errorHandler.js";
 import rateLimit from 'express-rate-limit';
@@ -41,6 +42,11 @@ app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/rates", rateRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/custom-orders", customOrderRoutes);
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok", uptime: process.uptime(), timestamp: new Date().toISOString() });
+});
+
 app.use(errorHandler);
 
 connectDB()

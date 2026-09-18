@@ -25,6 +25,10 @@ const OrderDetail = React.lazy(() => import("./pages/orderDetail"));
 const AdminDashboard = React.lazy(() => import("./pages/admin/dashboard.jsx"));
 const AdminProducts = React.lazy(() => import("./pages/admin/products.jsx"));
 const AdminOrders = React.lazy(() => import("./pages/admin/orders.jsx"));
+const AdminCustomOrders = React.lazy(() => import("./pages/admin/AdminCustomOrders.jsx"));
+const CustomOrder = React.lazy(() => import("./pages/CustomOrder"));
+const SizeFinder = React.lazy(() => import("./pages/SizeFinder"));
+const PriceCalculator = React.lazy(() => import("./pages/PriceCalculator"));
 const NotFound = React.lazy(() => import("./pages/notFound"));
 
 // Luxury fallback loader component
@@ -68,6 +72,8 @@ function App() {
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/size-finder" element={<SizeFinder />} />
+            <Route path="/price-calculator" element={<PriceCalculator />} />
             <Route
               path="/cart"
               element={
@@ -117,6 +123,14 @@ function App() {
               }
             />
             <Route
+              path="/custom-designs"
+              element={
+                <ProtectedRoute>
+                  <CustomOrder />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/admin"
               element={
                 <AdminRoute>
@@ -127,6 +141,7 @@ function App() {
               <Route index element={<AdminDashboard />} />
               <Route path="products" element={<AdminProducts />} />
               <Route path="orders" element={<AdminOrders />} />
+              <Route path="custom-orders" element={<AdminCustomOrders />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

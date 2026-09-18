@@ -7,9 +7,17 @@ import {
   getAllOrders,
   updateOrderStatus,
   cancelOrder,
+  getRazorpayKey,
+  createRazorpayOrder,
+  verifyRazorpayPayment,
 } from '../controllers/orderController.js';
 
 const router = express.Router();
+
+// Razorpay payment routes
+router.get('/razorpay/key', protect, getRazorpayKey);
+router.post('/razorpay/create-order', protect, createRazorpayOrder);
+router.post('/razorpay/verify-payment', protect, verifyRazorpayPayment);
 
 // User routes
 router.post('/', protect, placeOrder);

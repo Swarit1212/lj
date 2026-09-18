@@ -20,49 +20,42 @@ export const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#D4AF37]/20 shadow-sm">
+    <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-xl border-b border-gold-500/15 shadow-xs transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#0B132B] to-[#1A264D] border border-[#D4AF37]/50 flex items-center justify-center text-[#D4AF37] font-heading text-xl font-bold group-hover:scale-105 transition-transform">
+        <Link to="/" className="flex items-center gap-3 group">
+          <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-[#050B1A] to-[#121E3D] border border-gold-500/40 flex items-center justify-center text-gold-500 font-heading text-xl font-bold shadow-md shadow-gold-500/5 group-hover:scale-105 group-hover:border-gold-500 transition-all duration-300">
             LJ
           </div>
           <div>
-            <span className="font-heading text-2xl font-bold tracking-wider text-[#0B132B] block leading-none">
+            <span className="font-heading text-2xl font-bold tracking-widest text-royal-navy block leading-none transition-colors group-hover:text-gold-500">
               LJ JEWELRY
             </span>
-            <span className="text-[10px] uppercase tracking-widest text-[#D4AF37] font-semibold block mt-0.5">
+            <span className="text-[9px] uppercase tracking-widest text-gold-500 font-bold block mt-0.5">
               LUXURY & ATELIER
             </span>
           </div>
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
-          <Link
-            to="/"
-            className="text-neutral-700 hover:text-[#D4AF37] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#D4AF37] hover:after:w-full after:transition-all after:duration-300"
-          >
-            HOME
-          </Link>
-          <Link
-            to="/shop"
-            className="text-neutral-700 hover:text-[#D4AF37] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#D4AF37] hover:after:w-full after:transition-all after:duration-300"
-          >
-            COLLECTIONS
-          </Link>
-          <Link
-            to="/shop?material=gold"
-            className="text-neutral-700 hover:text-[#D4AF37] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#D4AF37] hover:after:w-full after:transition-all after:duration-300"
-          >
-            GOLD
-          </Link>
-          <Link
-            to="/shop?material=silver"
-            className="text-neutral-700 hover:text-[#D4AF37] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#D4AF37] hover:after:w-full after:transition-all after:duration-300"
-          >
-            SILVER
-          </Link>
+        <nav className="hidden md:flex items-center gap-8 text-[11px] font-bold tracking-widest">
+          {[
+            { label: "HOME", path: "/" },
+            { label: "COLLECTIONS", path: "/shop" },
+            { label: "GOLD", path: "/shop?material=gold" },
+            { label: "SILVER", path: "/shop?material=silver" },
+            { label: "CUSTOM DESIGN", path: "/custom-designs" },
+            { label: "CALCULATOR", path: "/price-calculator" },
+            { label: "SIZE FINDER", path: "/size-finder" },
+          ].map((item) => (
+            <Link
+              key={item.label}
+              to={item.path}
+              className="text-neutral-600 hover:text-gold-500 transition-colors relative py-1.5 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[1.5px] after:bg-gold-500 hover:after:w-full after:transition-all after:duration-300"
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
         {/* User Actions & Cart */}
@@ -172,6 +165,27 @@ export const Navbar = () => {
             className="block py-2 text-sm font-semibold text-neutral-800"
           >
             SILVER JEWELRY
+          </Link>
+          <Link
+            to="/custom-designs"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-sm font-semibold text-neutral-800"
+          >
+            CUSTOM DESIGN
+          </Link>
+          <Link
+            to="/price-calculator"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-sm font-semibold text-neutral-800"
+          >
+            PRICING CALCULATOR
+          </Link>
+          <Link
+            to="/size-finder"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-sm font-semibold text-neutral-800"
+          >
+            SIZE FINDER
           </Link>
         </div>
       )}

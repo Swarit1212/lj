@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 const orderSchema = new mongoose.Schema(
   {
     user: {
@@ -26,24 +27,38 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    paymentMethod: {
+      type: String,
+      enum: ["cod", "razorpay", "card", "upi", "simulated"],
+      default: "cod",
+    },
     paymentStatus: {
       type: String,
       enum: ["pending", "paid", "failed"],
       default: "pending",
     },
+    paymentDetails: {
+      razorpayOrderId: { type: String },
+      razorpayPaymentId: { type: String },
+      razorpaySignature: { type: String },
+    },
     orderStatus: {
       type: String,
-      enum: ["delivered", "shipped", "processing", "cancelled"],
+      enum: ["pending", "processing", "shipped", "delivered", "cancelled"],
       default: "processing",
     },
     shippingAddress: {
+      name: String,
+      email: String,
+      phone: String,
       address: String,
       city: String,
+      state: String,
       zipCode: String,
       country: String,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 const orderModel = mongoose.model("Order", orderSchema);

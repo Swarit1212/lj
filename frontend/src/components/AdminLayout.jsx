@@ -17,6 +17,7 @@ const AdminLayout = () => {
     { name: "📈 Overview Dashboard", path: "/admin" },
     { name: "💎 Catalog Products", path: "/admin/products" },
     { name: "📦 Order Fulfillment", path: "/admin/orders" },
+    { name: "🛠 Custom Orders", path: "/admin/custom-orders" },
   ];
 
   return (

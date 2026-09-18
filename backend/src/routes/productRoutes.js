@@ -7,6 +7,7 @@ import {
   putProduct,
   deleteProduct,
   searchProducts,
+  getPopularProducts,
 } from "../controllers/productController.js";
 
 import { protect, adminOnly } from "../middlewares/authMiddleware.js";
@@ -15,6 +16,7 @@ import { upload } from "../config/cloudinary.js";
 const router = express.Router();
 router.get("/meta", getProductMeta);
 router.get("/search", searchProducts);
+router.get("/admin/popular", protect, adminOnly, getPopularProducts);
 router.get("/", getProducts);
 router.get("/:id", getProductById);
 

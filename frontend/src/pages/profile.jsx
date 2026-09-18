@@ -153,6 +153,12 @@ const Profile = () => {
             >
               🔒 Security & Password
             </button>
+            <Link
+              to="/custom-designs"
+              className="w-full block text-left px-5 py-3 text-xs font-bold uppercase tracking-wider rounded-xl bg-white text-neutral-600 hover:bg-neutral-50 hover:text-black border border-neutral-200 transition-all hover:border-[#D4AF37]/50"
+            >
+              ✨ Custom Designs
+            </Link>
           </aside>
 
           <div className="lg:col-span-3">

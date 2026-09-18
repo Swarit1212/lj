@@ -3,19 +3,18 @@ import { useState, createContext, useEffect } from "react";
 export const authContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
+  const [user, setUser] = useState(() => {
     try {
       const userInfo = localStorage.getItem("UserInfo");
       if (userInfo && userInfo !== "undefined") {
-        setUser(JSON.parse(userInfo));
+        return JSON.parse(userInfo);
       }
     } catch (err) {
       console.warn("Failed to parse UserInfo from localStorage:", err);
       localStorage.removeItem("UserInfo");
     }
-  }, []);
+    return null;
+  });
 
   const login = (data) => {
     localStorage.setItem("UserInfo", JSON.stringify(data));

@@ -90,7 +90,7 @@ const ProductDetail = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div className="space-y-4">
-            <div className="aspect-square bg-white rounded-2xl overflow-hidden border border-neutral-200/80 shadow-md">
+            <div className="aspect-square bg-white rounded-3xl overflow-hidden border border-gold-500/10 shadow-md transform hover:scale-[1.01] transition-all duration-500">
               <img
                 src={product.imageUrl || "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80"}
                 alt={product.name}
@@ -101,13 +101,13 @@ const ProductDetail = () => {
 
           <div className="space-y-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] block mb-1">
+              <span className="text-[9px] font-bold uppercase tracking-widest text-gold-500 block mb-1">
                 {product.category} • {product.wearingType}
               </span>
-              <h1 className="font-heading text-3xl sm:text-4xl font-bold text-[#0B132B]">
+              <h1 className="font-heading text-3xl sm:text-4xl font-semibold text-royal-navy">
                 {product.name}
               </h1>
-              <p className="text-xs text-neutral-500 font-light mt-2 leading-relaxed">
+              <p className="text-xs text-neutral-400 font-light mt-3 leading-relaxed font-sans">
                 {product.description || "Indulge in our exquisite artisan craftsmanship, designed with pristine quality metals and pure stones."}
               </p>
             </div>
@@ -120,20 +120,20 @@ const ProductDetail = () => {
               karat={karat}
             />
 
-            <div className="flex items-center gap-6 pt-4 border-t border-neutral-100">
-              <div className="flex items-center border border-neutral-200 rounded-lg overflow-hidden bg-white shadow-sm">
+            <div className="flex items-center gap-6 pt-4 border-t border-neutral-100/70">
+              <div className="flex items-center border border-neutral-200 rounded-xl overflow-hidden bg-white shadow-xs font-sans">
                 <button
                   onClick={() => setQty(prev => Math.max(1, prev - 1))}
-                  className="px-4 py-2 hover:bg-neutral-100 font-semibold text-[#0B132B] transition-colors"
+                  className="px-4 py-2.5 hover:bg-neutral-50 font-bold text-neutral-600 transition-colors cursor-pointer text-sm"
                 >
                   -
                 </button>
-                <span className="px-5 py-2 text-xs font-bold text-[#0B132B] bg-neutral-50 border-x border-neutral-200">
+                <span className="px-5 py-2 text-xs font-bold text-royal-navy bg-neutral-50/50 border-x border-neutral-200/60">
                   {qty}
                 </span>
                 <button
                   onClick={() => setQty(prev => prev + 1)}
-                  className="px-4 py-2 hover:bg-neutral-100 font-semibold text-[#0B132B] transition-colors"
+                  className="px-4 py-2.5 hover:bg-neutral-50 font-bold text-neutral-600 transition-colors cursor-pointer text-sm"
                 >
                   +
                 </button>
@@ -143,55 +143,55 @@ const ProductDetail = () => {
                 variant="primary"
                 size="lg"
                 onClick={() => addToCart(product._id, qty)}
-                className="flex-1"
+                className="flex-1 !py-3.5 !text-[11px] !font-bold !tracking-widest rounded-xl shadow-lg shadow-gold-500/10"
               >
-                Add to Premium Bag
+                ADD TO PREMIUM BAG
               </Button>
             </div>
 
-            <div className="mt-8 border border-neutral-200 rounded-xl overflow-hidden bg-white shadow-xs">
-              <div className="flex border-b border-neutral-200 bg-neutral-50">
+            <div className="mt-10 border border-gold-500/10 rounded-2xl overflow-hidden bg-white shadow-xs">
+              <div className="flex p-1 bg-neutral-100/70 border-b border-neutral-200/40">
                 <button
                   onClick={() => setActiveTab("specs")}
-                  className={`flex-1 py-3 text-xs uppercase font-bold tracking-wider transition-colors ${
+                  className={`flex-1 py-2.5 rounded-xl text-[10px] uppercase font-bold tracking-widest transition-all duration-300 cursor-pointer ${
                     activeTab === "specs"
-                      ? "text-[#D4AF37] bg-white border-b-2 border-b-[#D4AF37]"
-                      : "text-neutral-500 hover:text-[#0B132B]"
+                      ? "text-gold-500 bg-white shadow-xs border border-gold-500/5 font-extrabold"
+                      : "text-neutral-500 hover:text-royal-navy"
                   }`}
                 >
                   Specifications
                 </button>
                 <button
                   onClick={() => setActiveTab("shipping")}
-                  className={`flex-1 py-3 text-xs uppercase font-bold tracking-wider transition-colors ${
+                  className={`flex-1 py-2.5 rounded-xl text-[10px] uppercase font-bold tracking-widest transition-all duration-300 cursor-pointer ${
                     activeTab === "shipping"
-                      ? "text-[#D4AF37] bg-white border-b-2 border-b-[#D4AF37]"
-                      : "text-neutral-500 hover:text-[#0B132B]"
+                      ? "text-gold-500 bg-white shadow-xs border border-gold-500/5 font-extrabold"
+                      : "text-neutral-500 hover:text-royal-navy"
                   }`}
                 >
                   Insured Shipping
                 </button>
               </div>
 
-              <div className="p-6 text-xs text-neutral-600 leading-relaxed">
+              <div className="p-6 text-xs text-neutral-500 leading-relaxed font-sans">
                 {activeTab === "specs" && (
                   <div className="grid grid-cols-2 gap-y-3 gap-x-4">
-                    <div className="font-semibold text-neutral-500">Metal Material:</div>
-                    <div className="text-neutral-800 font-medium capitalize">{product.material}</div>
+                    <div className="font-bold text-neutral-400 uppercase tracking-widest text-[9px]">Metal Material:</div>
+                    <div className="text-royal-navy font-bold capitalize">{product.material}</div>
                     
-                    <div className="font-semibold text-neutral-500">Purity Rating:</div>
-                    <div className="text-neutral-800 font-medium">{karat.toUpperCase()}</div>
+                    <div className="font-bold text-neutral-400 uppercase tracking-widest text-[9px]">Purity Rating:</div>
+                    <div className="text-royal-navy font-bold">{karat.toUpperCase()}</div>
 
-                    <div className="font-semibold text-neutral-500">Total Net Weight:</div>
-                    <div className="text-neutral-800 font-medium">{product.weight} Grams</div>
+                    <div className="font-bold text-neutral-400 uppercase tracking-widest text-[9px]">Total Net Weight:</div>
+                    <div className="text-royal-navy font-bold">{product.weight} Grams</div>
 
-                    <div className="font-semibold text-neutral-500">Certification:</div>
-                    <div className="text-neutral-800 font-medium">🛡️ BIS Laser Hallmarked</div>
+                    <div className="font-bold text-neutral-400 uppercase tracking-widest text-[9px]">Certification:</div>
+                    <div className="text-royal-navy font-bold flex items-center gap-1">🛡️ BIS Laser Hallmarked</div>
                   </div>
                 )}
 
                 {activeTab === "shipping" && (
-                  <p>
+                  <p className="font-light">
                     Every order from LJ Jewelry is shipped in secure, tamper-evident packaging. Delivery is fully insured by transit specialists. Expect standard shipping within 3-5 business days. Free returns and alterations can be processed under our lifetime exchange policies.
                   </p>
                 )}

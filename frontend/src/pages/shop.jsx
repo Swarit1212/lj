@@ -137,29 +137,29 @@ const Shop = () => {
         <title>{material === "gold" ? "Premium Gold Jewelry Collection" : "Exquisite Sterling Silver Collection"} | LJ Jewelry</title>
         <meta name="description" content={`Browse our exclusive catalog of fine artisan ${material === "gold" ? "gold rings, custom gold necklaces, and bangles with live purity pricing" : "925 silver cuffs, drop earrings, and necklaces with live rates"} index.`} />
       </Helmet>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Search & Material Selector Header */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-neutral-200">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-neutral-200/60">
         <div>
-          <h1 className="font-heading text-3xl sm:text-4xl font-bold text-[#0B132B]">
-            {material === "gold" ? "Gold Collection" : "Silver Collection"}
+          <h1 className="font-heading text-3xl sm:text-4xl font-bold text-royal-navy">
+            {material === "gold" ? "Gold Catalog" : "Silver Catalog"}
           </h1>
-          <p className="text-xs text-neutral-500 mt-1 font-sans">
-            Showing dynamic live catalog priced using real-time market rates.
+          <p className="text-xs text-neutral-400 mt-1.5 font-sans font-medium">
+            Exquisite jewelry priced dynamically using live market rates.
           </p>
         </div>
 
         {/* Material Selection Buttons */}
-        <div className="flex items-center gap-3 bg-neutral-100 p-1.5 rounded-lg border border-neutral-200">
+        <div className="flex items-center gap-2.5 bg-neutral-100/80 p-1.5 rounded-xl border border-neutral-200/50">
           <button
             onClick={() => {
               setSearchParams({ material: "gold" });
               setSearchInput("");
             }}
-            className={`px-5 py-2 text-xs font-semibold uppercase tracking-wider rounded-md transition-all ${
+            className={`px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all cursor-pointer ${
               material === "gold"
-                ? "bg-[#D4AF37] text-white shadow-md"
-                : "text-[#0B132B] hover:text-[#D4AF37]"
+                ? "bg-gradient-to-r from-gold-500 to-gold-600 text-royal-navy shadow-md font-extrabold"
+                : "text-neutral-500 hover:text-gold-500"
             }`}
           >
             ★ Gold Catalog
@@ -169,10 +169,10 @@ const Shop = () => {
               setSearchParams({ material: "silver" });
               setSearchInput("");
             }}
-            className={`px-5 py-2 text-xs font-semibold uppercase tracking-wider rounded-md transition-all ${
+            className={`px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all cursor-pointer ${
               material === "silver"
-                ? "bg-[#0B132B] text-[#D4AF37] shadow-md"
-                : "text-[#0B132B] hover:text-[#D4AF37]"
+                ? "bg-royal-navy text-gold-500 shadow-md font-extrabold border border-gold-500/25"
+                : "text-neutral-500 hover:text-gold-500"
             }`}
           >
             ✦ Silver Catalog
@@ -181,42 +181,42 @@ const Shop = () => {
       </div>
 
       {/* Main Layout Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mt-8">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 mt-10">
         {/* Sidebar Filters - Desktop */}
-        <aside className="hidden lg:block space-y-6">
-          <form onSubmit={handleSearchSubmit} className="space-y-2">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-[#0B132B]">Search Catalog</h3>
+        <aside className="hidden lg:block space-y-8 bg-white border border-gold-500/10 p-6 rounded-2xl shadow-xs">
+          <form onSubmit={handleSearchSubmit} className="space-y-3">
+            <h3 className="text-[10px] font-bold uppercase tracking-wider text-royal-navy">Search Catalog</h3>
             <div className="relative">
               <input
                 type="text"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 placeholder="Search rings, necklaces..."
-                className="w-full bg-white border border-neutral-300 rounded-md px-3 py-2 text-xs focus:ring-1 focus:ring-[#D4AF37] focus:outline-none"
+                className="w-full bg-neutral-50 border border-neutral-200 rounded-lg px-3 py-2 text-xs focus:ring-1 focus:ring-gold-500/35 focus:outline-none focus:border-gold-500/50 focus:bg-white transition-all shadow-xs"
               />
-              <button type="submit" className="absolute right-2.5 top-2.5 text-neutral-400 hover:text-[#D4AF37]">
+              <button type="submit" className="absolute right-3 top-2.5 text-neutral-400 hover:text-gold-500 cursor-pointer">
                 🔍
               </button>
             </div>
           </form>
 
           {meta.categories?.length > 0 && (
-            <div className="space-y-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-[#0B132B]">Category</h3>
-              <div className="space-y-1.5">
+            <div className="space-y-3 border-t border-neutral-100 pt-6">
+              <h3 className="text-[10px] font-bold uppercase tracking-wider text-royal-navy">Category</h3>
+              <div className="space-y-2 flex flex-col items-start">
                 <button
                   onClick={() => updateParam("category", "")}
-                  className={`block text-xs text-left ${!category ? "text-[#D4AF37] font-bold" : "text-neutral-600 hover:text-[#D4AF37]"}`}
+                  className={`text-xs text-left cursor-pointer transition-all duration-200 hover:translate-x-1 ${!category ? "text-gold-500 font-bold" : "text-neutral-500 hover:text-gold-500"}`}
                 >
-                  All Categories
+                  {!category ? "✦ All Categories" : "All Categories"}
                 </button>
                 {meta.categories.map((cat) => (
                   <button
                     key={cat}
                     onClick={() => updateParam("category", cat)}
-                    className={`block text-xs text-left ${category === cat ? "text-[#D4AF37] font-bold" : "text-neutral-600 hover:text-[#D4AF37]"}`}
+                    className={`text-xs text-left cursor-pointer transition-all duration-200 hover:translate-x-1 ${category === cat ? "text-gold-500 font-bold" : "text-neutral-500 hover:text-gold-500"}`}
                   >
-                    {cat}
+                    {category === cat ? `✦ ${cat}` : cat}
                   </button>
                 ))}
               </div>
@@ -224,22 +224,22 @@ const Shop = () => {
           )}
 
           {meta.wearingTypes?.length > 0 && (
-            <div className="space-y-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-[#0B132B]">Wearing Style</h3>
-              <div className="space-y-1.5">
+            <div className="space-y-3 border-t border-neutral-100 pt-6">
+              <h3 className="text-[10px] font-bold uppercase tracking-wider text-royal-navy">Wearing Style</h3>
+              <div className="space-y-2 flex flex-col items-start">
                 <button
                   onClick={() => updateParam("wearingType", "")}
-                  className={`block text-xs text-left ${!wearingType ? "text-[#D4AF37] font-bold" : "text-neutral-600 hover:text-[#D4AF37]"}`}
+                  className={`text-xs text-left cursor-pointer transition-all duration-200 hover:translate-x-1 ${!wearingType ? "text-gold-500 font-bold" : "text-neutral-500 hover:text-gold-500"}`}
                 >
-                  All Styles
+                  {!wearingType ? "✦ All Styles" : "All Styles"}
                 </button>
                 {meta.wearingTypes.map((wt) => (
                   <button
                     key={wt}
                     onClick={() => updateParam("wearingType", wt)}
-                    className={`block text-xs text-left ${wearingType === wt ? "text-[#D4AF37] font-bold" : "text-neutral-600 hover:text-[#D4AF37]"}`}
+                    className={`text-xs text-left cursor-pointer transition-all duration-200 hover:translate-x-1 ${wearingType === wt ? "text-gold-500 font-bold" : "text-neutral-500 hover:text-gold-500"}`}
                   >
-                    {wt}
+                    {wearingType === wt ? `✦ ${wt}` : wt}
                   </button>
                 ))}
               </div>
@@ -247,42 +247,44 @@ const Shop = () => {
           )}
 
           {meta.purities?.length > 0 && (
-            <div className="space-y-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-[#0B132B]">Purity</h3>
-              <div className="space-y-1.5">
+            <div className="space-y-3 border-t border-neutral-100 pt-6">
+              <h3 className="text-[10px] font-bold uppercase tracking-wider text-royal-navy">Purity</h3>
+              <div className="space-y-2 flex flex-col items-start">
                 <button
                   onClick={() => updateParam("purity", "")}
-                  className={`block text-xs text-left ${!purity ? "text-[#D4AF37] font-bold" : "text-neutral-600 hover:text-[#D4AF37]"}`}
+                  className={`text-xs text-left cursor-pointer transition-all duration-200 hover:translate-x-1 ${!purity ? "text-gold-500 font-bold" : "text-neutral-500 hover:text-gold-500"}`}
                 >
-                  All Purities
+                  {!purity ? "✦ All Purities" : "All Purities"}
                 </button>
                 {meta.purities.map((p) => (
                   <button
                     key={p}
                     onClick={() => updateParam("purity", p.toString())}
-                    className={`block text-xs text-left ${purity === p.toString() ? "text-[#D4AF37] font-bold" : "text-neutral-600 hover:text-[#D4AF37]"}`}
+                    className={`text-xs text-left cursor-pointer transition-all duration-200 hover:translate-x-1 ${purity === p.toString() ? "text-gold-500 font-bold" : "text-neutral-500 hover:text-gold-500"}`}
                   >
-                    {p}K {material === "gold" ? "Gold" : "Silver"}
+                    {purity === p.toString() ? `✦ ${p}K ${material === "gold" ? "Gold" : "Silver"}` : `${p}K ${material === "gold" ? "Gold" : "Silver"}`}
                   </button>
                 ))}
               </div>
             </div>
           )}
 
-          <Button variant="outline" size="sm" className="w-full text-xs" onClick={clearFilters}>
-            Clear All Filters
-          </Button>
+          <div className="border-t border-neutral-100 pt-6">
+            <Button variant="outline" size="sm" className="w-full !text-[10px] font-bold tracking-widest py-3 rounded-xl hover:shadow-xs active:scale-[0.98]" onClick={clearFilters}>
+              CLEAR FILTERS
+            </Button>
+          </div>
         </aside>
 
         {/* Catalog Main Panel */}
         <div className="lg:col-span-3 space-y-6">
-          <div className="flex items-center justify-between bg-neutral-50 p-4 rounded-xl border border-neutral-200/80">
-            <span className="text-xs text-neutral-500 font-medium">
-              {products.length} {products.length === 1 ? "Product" : "Products"} Found
+          <div className="flex items-center justify-between bg-white px-5 py-4 rounded-2xl border border-gold-500/10 shadow-xs">
+            <span className="text-[11px] text-neutral-400 font-bold uppercase tracking-widest">
+              {products.length} {products.length === 1 ? "Masterpiece" : "Masterpieces"} Found
             </span>
 
             <div className="flex items-center gap-3">
-              <label className="text-xs text-neutral-400">Sort By:</label>
+              <label className="text-[10px] text-neutral-400 font-bold uppercase tracking-widest">Sort By:</label>
               <select
                 value={`${sortBy}-${sortOrder}`}
                 onChange={(e) => {
@@ -293,7 +295,7 @@ const Shop = () => {
                   newParams.set("sortOrder", so);
                   setSearchParams(newParams);
                 }}
-                className="bg-white border border-neutral-200 rounded-md p-1.5 text-xs text-neutral-700 focus:outline-none"
+                className="bg-neutral-50 border border-neutral-200/80 rounded-lg py-1.5 px-3 text-xs text-neutral-700 font-medium focus:outline-none focus:border-gold-500/40 cursor-pointer shadow-xs transition-colors hover:bg-neutral-100/50"
               >
                 <option value="createdAt-desc">Newest Arrivals</option>
                 <option value="price-asc">Price: Low to High</option>
@@ -303,7 +305,7 @@ const Shop = () => {
 
               <button
                 onClick={() => setShowMobileFilters(true)}
-                className="lg:hidden bg-[#0B132B] text-white p-2 rounded-md text-xs hover:bg-[#D4AF37]"
+                className="lg:hidden bg-royal-navy text-gold-500 border border-gold-500/25 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-gold-500 hover:text-royal-navy transition-colors duration-200 cursor-pointer"
               >
                 Filters ☰
               </button>

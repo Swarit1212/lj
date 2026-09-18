@@ -14,49 +14,49 @@ export const LivePriceBreakdown = ({
   const finalPrice = totalBeforeTax + gst;
 
   return (
-    <div className="bg-[#FAFAFA] border border-[#D4AF37]/30 rounded-xl p-5 shadow-sm">
-      <div className="flex items-center justify-between pb-3 border-b border-neutral-200">
-        <h4 className="font-heading text-lg font-bold text-[#0B132B] flex items-center gap-2">
-          <span>✨ Live Transparent Valuation</span>
+    <div className="bg-white border border-gold-500/15 rounded-2xl p-6 shadow-xs">
+      <div className="flex items-center justify-between pb-4 border-b border-neutral-100">
+        <h4 className="font-heading text-base font-bold text-royal-navy flex items-center gap-2">
+          <span>✨ Live Valuation Summary</span>
         </h4>
-        <span className="text-xs bg-[#D4AF37]/15 text-[#92710c] px-2.5 py-1 rounded-full font-semibold">
+        <span className="text-[9px] bg-gold-500/10 border border-gold-500/20 text-gold-700 px-2.5 py-1 rounded-md font-bold uppercase tracking-wider">
           3% GST Included
         </span>
       </div>
 
-      <div className="mt-4 space-y-2.5 text-xs text-neutral-600">
+      <div className="mt-5 space-y-3 text-xs text-neutral-500">
         <div className="flex justify-between items-center">
-          <span>
-            Material Base Cost ({weight}g × {formatCurrency(ratePerGram)}/g)
+          <span className="tracking-wide">
+            Base Material Cost ({weight}g × {formatCurrency(ratePerGram)}/g)
           </span>
-          <span className="font-semibold text-neutral-800">{formatCurrency(basePrice)}</span>
+          <span className="font-semibold text-royal-navy">{formatCurrency(basePrice)}</span>
         </div>
 
         <div className="flex justify-between items-center">
-          <span>Artisan Making Charges</span>
-          <span className="font-semibold text-neutral-800">{formatCurrency(makingCharge)}</span>
+          <span className="tracking-wide">Artisan Making Charges</span>
+          <span className="font-semibold text-royal-navy">{formatCurrency(makingCharge)}</span>
         </div>
 
         <div className="flex justify-between items-center">
-          <span>GST (3%)</span>
-          <span className="font-semibold text-neutral-800">{formatCurrency(gst)}</span>
+          <span className="tracking-wide">Government GST (3%)</span>
+          <span className="font-semibold text-royal-navy">{formatCurrency(gst)}</span>
         </div>
       </div>
 
-      <div className="mt-4 pt-3 border-t border-neutral-200 flex items-center justify-between">
+      <div className="mt-5 pt-4 border-t border-neutral-100 flex items-center justify-between">
         <div>
-          <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider block">
+          <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest block mb-0.5">
             Total Price
           </span>
-          <span className="font-heading text-2xl font-bold text-[#0B132B]">
+          <span className="font-heading text-3xl font-bold text-royal-navy">
             {formatCurrency(finalPrice)}
           </span>
         </div>
         <div className="text-right">
-          <span className="text-[11px] text-emerald-600 font-bold block">
+          <span className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider block mb-0.5">
             ✓ BIS Hallmarked
           </span>
-          <span className="text-[10px] text-neutral-400">100% Certified Purity</span>
+          <span className="text-[9px] text-neutral-400 font-medium">100% Certified Purity</span>
         </div>
       </div>
     </div>

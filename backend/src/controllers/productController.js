@@ -209,3 +209,12 @@ export const searchProducts = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getPopularProducts = async (req, res, next) => {
+  try {
+    const popular = await product.find().sort({ visitCount: -1 }).limit(5).lean();
+    res.json(popular);
+  } catch (error) {
+    next(error);
+  }
+};
