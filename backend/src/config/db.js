@@ -12,12 +12,19 @@ if (!process.env.MONGODB_URI) {
 }
 
 const connectDB = async () => {
+  if (!process.env.MONGODB_URI) {
+    console.error('⚠️ [DB ERROR] MONGODB_URI is not set in environment variables! Please configure it in your dashboard.');
+    return;
+  }
+
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log('Connected to MongoDB');
+    console.log('Connecting to MongoDB...');
+    await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000,
+    });
+    console.log('✅ Connected to MongoDB successfully.');
   } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
-    process.exit(1);
+    console.error('❌ Error connecting to MongoDB:', error.message);
   }
 };
 

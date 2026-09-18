@@ -49,13 +49,7 @@ app.get("/health", (req, res) => {
 
 app.use(errorHandler);
 
-connectDB()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-  })
-  .catch((error) => {
-    console.error("Failed to connect to the database:", error);
-    process.exit(1);
-  });
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server is running on port ${PORT}`);
+  connectDB();
+});
