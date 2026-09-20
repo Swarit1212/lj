@@ -1,3 +1,7 @@
+/**
+ * Calculate total cart value using live metal rates.
+ * Silently skips items whose rate cannot be fetched (logged to stderr).
+ */
 import { getRate } from './rates.js';
 import priceCalculator from './priceCalculator.js';
 
@@ -7,15 +11,15 @@ const calcCartTotal = async (cart) => {
 
   for (const item of cart.products) {
     if (!item.product) continue;
-    
+
     try {
       const rate = await getRate(item.product.material);
       const priceDetails = priceCalculator(item.product, rate);
-      
+
       totalItems += item.quantity;
       totalPrice += item.quantity * priceDetails.totalPrice;
     } catch (error) {
-      console.error(`Error calculating price for product ${item.product._id}:`, error);
+      console.error(`[cartTotal] Failed to calculate price for product ${item.product._id}:`, error.message);
     }
   }
 

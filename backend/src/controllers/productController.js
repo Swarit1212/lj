@@ -2,13 +2,33 @@ import product from "../models/product.js";
 import { getRate } from "../utils/rates.js";
 import priceCalculator from "../utils/priceCalculator.js";
 
+/**
+ * Validate that material is a supported type (gold or silver).
+ * Returns true if valid, false otherwise.
+ */
+export const validateMaterial = (material) => {
+  if (!material || !["gold", "silver"].includes(material.toLowerCase())) {
+    return false;
+  }
+  return true;
+};
+
+/**
+ * Resolve the image URL from an uploaded file.
+ * Handles both Cloudinary (HTTPS) and local disk storage paths.
+ */
+export const resolveImageUrl = (file) => {
+  if (!file) return null;
+  return file.path.startsWith('http')
+    ? file.path
+    : `/uploads/${file.filename}`;
+};
+
 export const getProductMeta = async (req, res, next) => {
   try {
     const { material } = req.query;
-    if (!material || !["gold", "silver"].includes(material.toLowerCase())) {
-      return res
-        .status(400)
-        .json({ error: "Invalid or missing material parameter" });
+    if (!validateMaterial(material)) {
+      return res.status(400).json({ error: "Invalid or missing material parameter" });
     }
     const filter = { material };
     const categories = await product.distinct("category", filter);
@@ -51,10 +71,8 @@ export const getProducts = async (req, res, next) => {
       sortBy = "createdAt",
       sortOrder = "desc",
     } = req.query;
-    if (!material || !["gold", "silver"].includes(material.toLowerCase())) {
-      return res
-        .status(400)
-        .json({ error: "Invalid or missing material parameter" });
+    if (!validateMaterial(material)) {
+      return res.status(400).json({ error: "Invalid or missing material parameter" });
     }
     const filter = { material };
     if (category) filter.category = category;
@@ -85,7 +103,7 @@ export const getProducts = async (req, res, next) => {
       .lean();
 
     const rate = await getRate(material);
-    allProducts.map((p) => {
+    allProducts.forEach((p) => {
       const priceDetails = priceCalculator(p, rate);
       p.priceDetails = priceDetails;
     });
@@ -128,9 +146,7 @@ export const getProductById = async (req, res, next) => {
 export const postProduct = async (req, res, next) => {
   try {
     if (req.file) {
-      req.body.imageUrl = req.file.path.startsWith('http') 
-        ? req.file.path 
-        : `/uploads/${req.file.filename}`;
+      req.body.imageUrl = resolveImageUrl(req.file);
     }
     const newProduct = await product.create(req.body);
     res.status(201).json(newProduct);
@@ -142,9 +158,7 @@ export const postProduct = async (req, res, next) => {
 export const putProduct = async (req, res, next) => {
   try {
     if (req.file) {
-      req.body.imageUrl = req.file.path.startsWith('http') 
-        ? req.file.path 
-        : `/uploads/${req.file.filename}`;
+      req.body.imageUrl = resolveImageUrl(req.file);
     }
     const updatedProduct = await product.findByIdAndUpdate(
       req.params.id,

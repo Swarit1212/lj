@@ -1,11 +1,16 @@
 import Rate from '../models/rate.js';
 
+/**
+ * In-memory rate cache with 5-minute TTL per metal type.
+ * Falls back to default reference rates when DB has no data.
+ */
 let cache = {
   gold: { value: null, expiresAt: 0 },
   silver: { value: null, expiresAt: 0 },
 };
 
-const TTL_MS = 30000;
+// Cache TTL: 5 minutes (market rates update slowly)
+const TTL_MS = 5 * 60 * 1000;
 
 const fetchRate = async (metalType) => {
   const normalizedType = metalType.toLowerCase();
