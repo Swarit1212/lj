@@ -1,7 +1,6 @@
 import crypto from "crypto";
 import Order from "../models/order.js";
 import Cart from "../models/cart.js";
-import Product from "../models/product.js";
 import { getRate } from "../utils/rates.js";
 import priceCalculator from "../utils/priceCalculator.js";
 import asyncHandler from "express-async-handler";

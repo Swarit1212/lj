@@ -25,16 +25,24 @@ const updateProfile = async (req, res) => {
   }
 };
 
+/**
+ * Change user password. Validates current password and enforces minimum strength on new password.
+ */
 const changePassword = async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
-    
+
     if (!currentPassword || !newPassword) {
       return res.status(400).json({ message: 'Current password and new password are required' });
     }
 
+    // Enforce minimum password strength
+    if (newPassword.length < 6) {
+      return res.status(400).json({ message: 'New password must be at least 6 characters' });
+    }
+
     const user = await User.findById(req.user._id).select('+password');
-    
+
     if (!user.password) {
       return res.status(400).json({ message: 'Google accounts cannot change password' });
     }

@@ -1,4 +1,5 @@
 import CustomOrder from "../models/customOrder.js";
+import { resolveImageUrl } from "./productController.js";
 
 // Create a new custom order request
 export const createCustomOrder = async (req, res, next) => {
@@ -13,9 +14,7 @@ export const createCustomOrder = async (req, res, next) => {
       return res.status(400).json({ error: "Required fields (phone, material, weight) are missing" });
     }
 
-    const designImageUrl = req.file.path.startsWith("http")
-      ? req.file.path
-      : `/uploads/${req.file.filename}`;
+    const designImageUrl = resolveImageUrl(req.file);
 
     const newCustomOrder = await CustomOrder.create({
       user: req.user._id,

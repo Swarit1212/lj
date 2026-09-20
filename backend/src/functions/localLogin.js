@@ -16,7 +16,6 @@ const Login = async (req, res) => {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email }).select('+password');
-        console.log(user);
 
         if (!user) {
             return res.status(400).json({ message: "invalid email" });
@@ -41,7 +40,6 @@ const Login = async (req, res) => {
         });
 
     } catch (error) {
-        console.error(error); // 🔥 ADD THIS
         return res.status(500).json({ message: "internal server error" });
     }
 }

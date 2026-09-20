@@ -25,7 +25,7 @@ export const getCart = async (req, res) => {
   try {
     const cartItems = await getOrCreateCart(req.user._id);
     if (cartItems.products.length === 0) {
-      res.json({ items: [], totalItems: 0, totalPrice: 0 });
+      res.json({ products: [], totalItems: 0, totalPrice: 0 });
       return;
     }
     await populateCartProducts(cartItems);
@@ -94,9 +94,6 @@ export const updateCart = asyncHandler(async (req, res) => {
       .json({ message: "Quantity must be an integer greater than 0" });
   }
   const cart = await getOrCreateCart(req.user._id);
-  if (!cart) {
-    return res.status(404).json({ message: "Cart not found" });
-  }
   const index = cart.products.findIndex(
     (item) => item.product.toString() === productId,
   );
@@ -120,12 +117,9 @@ export const removeFromCart = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "Invalid productId" });
   }
   const cart = await getOrCreateCart(req.user._id);
-  if (!cart) {
-    return res.status(404).json({ message: "cart not found" });
-  }
   const before = cart.products.length;
   cart.products = cart.products.filter(
-    (item) => item.product.toString() != productId,
+    (item) => item.product.toString() !== productId,
   );
   if (cart.products.length === before) {
     return res.status(404).json({ message: "Product not found in cart" });
